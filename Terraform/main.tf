@@ -12,7 +12,6 @@ resource "google_sql_database_instance" "master" {
   name = "master1"
   database_version = "MYSQL_5_7"
   region       = var.region
-  zone         = var.zone
 
   settings {
     tier = "db-f1-micro"
