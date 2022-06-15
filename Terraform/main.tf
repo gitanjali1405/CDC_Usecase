@@ -22,5 +22,4 @@ resource "google_sql_database_instance" "master" {
 resource "google_composer_environment" "test" {
   name   = "example-composer-env"
   region = var.region
-  zone   = var.zone
 }
