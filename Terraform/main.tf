@@ -10,7 +10,7 @@ provider "google" {
 
 resource "google_sql_database_instance" "master" {
   name = "master1"
-  database_version = "SQL Server 2019 Standard"
+  database_version = "SQLSERVER_2019_STANDARD"
   region       = var.region
 
   settings {
