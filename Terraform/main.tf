@@ -25,8 +25,7 @@ resource "google_sql_database_instance" "cdc-poc" {
 resource "google_composer_environment" "test" {
   name   = "cdc-poc-composer-env"
   region = var.region
-  size = 30
-  tags = ["cdc-poc"]
+
   config {
     node_config {
       zone         = "us-central1-a"
@@ -35,6 +34,8 @@ resource "google_composer_environment" "test" {
       //network    = google_compute_network.private_network.id
       //subnetwork = google_compute_subnetwork.private_network.id
       service_account = google_service_account.cdc.name
+      size = 30
+      tags = ["cdc-poc"]
     }
     database_config {
       machine_type = "db-n1-standard-2"
