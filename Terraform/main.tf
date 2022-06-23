@@ -46,5 +46,5 @@ resource "google_composer_environment" "test" {
 }
 
 resource "google_service_account" "cdc" {
-account_id   = " cdc-service-account-1@di-gcp-351221.iam.gserviceaccount.com"
+account_id   = "cdc-service-account-1"
 }
