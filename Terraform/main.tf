@@ -22,7 +22,7 @@ resource "google_sql_database_instance" "cdc-poc" {
   }
 }
 
-resource "google_composer_environment" "test" {
+resource "google_composer_environment" "cdc" {
   name   = "cdc-poc-composer-env"
   region = var.region
 
@@ -34,7 +34,7 @@ resource "google_composer_environment" "test" {
 
       //network    = google_compute_network.private_network.id
       //subnetwork = google_compute_subnetwork.private_network.id
-      service_account = google_service_account.cdc.name
+      service_account = scv_account
       tags = ["cdc-poc"]
     }
     database_config {
@@ -46,6 +46,14 @@ resource "google_composer_environment" "test" {
   }
 }
 
-resource "google_service_account" "cdc" {
-account_id   = "cdc-service-account-1"
+locals {
+  service_account_private_key = base64encode(file("/path/to/private_key.json"))
+}
+module "scv_account"{
+
+  use_existing_service_account = true
+  service_account_name         = "cdc-service-account-1"
+  service_account_private_key  = local.service_account_private_key
+
+  source = ""
 }
