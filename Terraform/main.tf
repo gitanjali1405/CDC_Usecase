@@ -25,7 +25,7 @@ resource "google_sql_database_instance" "cdc-poc" {
 resource "google_composer_environment" "test" {
   name   = "cdc-poc-composer-env"
   region = var.region
-  disk_size_gb = 30
+  size = 30
   tags = ["cdc-poc"]
   config {
     node_config {
