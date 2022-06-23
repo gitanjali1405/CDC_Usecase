@@ -34,7 +34,6 @@ resource "google_composer_environment" "test" {
       //network    = google_compute_network.private_network.id
       //subnetwork = google_compute_subnetwork.private_network.id
       service_account = google_service_account.cdc.name
-      size = 30
       tags = ["cdc-poc"]
     }
     database_config {
