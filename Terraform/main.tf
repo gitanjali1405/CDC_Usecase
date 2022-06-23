@@ -28,6 +28,7 @@ resource "google_composer_environment" "test" {
 
   config {
     node_config {
+      disk_size_gb = 30
       zone         = "us-central1-a"
       machine_type = "n1-standard-1"
 
