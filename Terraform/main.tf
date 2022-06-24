@@ -8,6 +8,7 @@ provider "google" {
   zone = var.zone
 }
 
+
 resource "google_sql_database_instance" "cdc-poc" {
   name = "cdc-poc-sqlserver"
   database_version = "SQLSERVER_2019_STANDARD"
@@ -32,9 +33,9 @@ resource "google_composer_environment" "cdc" {
       zone         = "us-central1-a"
       machine_type = "n1-standard-1"
 
-      //network    = google_compute_network.private_network.id
-      //subnetwork = google_compute_subnetwork.private_network.id
-      service_account = scv_account
+      //network    = google_compute_network.network.id
+      //subnetwork = google_compute_subnetwork.subnetwork.id
+      //service_account = scv_account
       tags = ["cdc-poc"]
     }
     database_config {
@@ -46,14 +47,3 @@ resource "google_composer_environment" "cdc" {
   }
 }
 
-locals {
-  service_account_private_key = base64encode(file("/path/to/private_key.json"))
-}
-module "scv_account"{
-
-  use_existing_service_account = true
-  service_account_name         = "cdc-service-account-1"
-  service_account_private_key  = local.service_account_private_key
-
-  source = ""
-}
