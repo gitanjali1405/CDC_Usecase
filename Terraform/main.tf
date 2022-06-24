@@ -9,7 +9,7 @@ provider "google" {
 }
 
 
-resource "google_sql_database_instance" "cdc-poc" {
+resource "google_sql_database_instance" "cdc" {
   name = "cdc-poc-sqlserver"
   database_version = "SQLSERVER_2019_STANDARD"
   region = var.region
