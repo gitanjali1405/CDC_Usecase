@@ -1,7 +1,3 @@
-variable "project_name" {}
-variable "region" {}
-variable "zone" {}
-
 provider "google" {
   project = var.project_name
   region = var.region
@@ -9,7 +5,7 @@ provider "google" {
 }
 
 
-resource "google_sql_database_instance" "cdc" {
+resource "google_sql_database_instance" "instance" {
   name = "cdc-poc-sqlserver"
   database_version = "SQLSERVER_2019_STANDARD"
   region = var.region
