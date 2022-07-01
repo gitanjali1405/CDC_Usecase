@@ -33,11 +33,11 @@ resource "google_composer_environment" "cdc" {
       //service_account = scv_account
       tags = ["cdc-poc"]
     }
-    database_config {
+    /*database_config {
       machine_type = "db-n1-standard-2"
     }
     web_server_config {
       machine_type = "composer-n1-webserver-2"
-    }
+    }*/
   }
 }
