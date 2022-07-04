@@ -1,22 +1,29 @@
 provider "google" {
   project = "${var.project_name}"
   region = "${var.region}"
-  zone = var.zone
+  zone = "${var.zone}"
 }
 
-/*
-resource "google_sql_database_instance" "instance" {
+
+resource "google_sql_database_instance" "cdcsql" {
   name = "cdc-poc-sqlserver"
   database_version = "SQLSERVER_2019_STANDARD"
   region = "${var.region}"
 
   settings {
     tier = "db-f1-micro"
+    ip_configuration {
+      ipv4_enabled = false
+    }
   }
-
 }
-*/
 
+resource "google_sql_user" "users" {
+    name = "root"
+    instance = "${google_sql_database_instance.cdcsql.name}"
+    host = "%"
+    password = "root"
+}
 
 resource "google_composer_environment" "cdc" {
   name   = "cdc-poc-composer-env"
@@ -28,16 +35,16 @@ resource "google_composer_environment" "cdc" {
       zone         = "us-central1-a"
       machine_type = "n1-standard-1"
 
-      //network    = google_compute_network.network.id
-      //subnetwork = google_compute_subnetwork.subnetwork.id
-      //service_account = scv_account
+      //network    = "cdc-vpcnet-dev"
+      //subnetwork = "cdc-us-central-subnet1"
+      service_account =  "cdc-service-account-1@di-gcp-351221.iam.gserviceaccount.com"
       tags = ["cdc-poc"]
     }
-    /*database_config {
+    database_config {
       machine_type = "db-n1-standard-2"
     }
     web_server_config {
       machine_type = "composer-n1-webserver-2"
-    }*/
+    }
   }
 }
