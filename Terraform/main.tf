@@ -32,7 +32,7 @@ resource "google_composer_environment" "cdc" {
   config {
     node_config {
       disk_size_gb = 30
-      zone         = "us-central1-a"
+      zone         = "${var.zone}"
       machine_type = "n1-standard-1"
 
       //network    = "cdc-vpcnet-dev"
